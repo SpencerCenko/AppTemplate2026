@@ -30,6 +30,7 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
 
     private lateinit var enderecoEditText: EditText
+    private lateinit var descricaoItemEditText2: EditText
     private lateinit var itemImageView: ImageView
     private var imageUri: Uri? = null
 
@@ -67,6 +68,7 @@ class DashboardFragment : Fragment() {
         salvarButton = view.findViewById(R.id.salvarItemButton)
         selectImageButton = view.findViewById(R.id.button_select_image)
         enderecoEditText = view.findViewById(R.id.enderecoItemEditText)
+        descricaoItemEditText2 = view.findViewById(R.id.descricaoItemEditText2)
         //TODO("Capture aqui os outro campos que foram inseridos no layout. Por exemplo, ate
         // o momento so foi capturado o endereco (EditText)")
 
@@ -98,6 +100,7 @@ class DashboardFragment : Fragment() {
     private fun salvarItem() {
         //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
         val endereco = enderecoEditText.text.toString().trim()
+        val descricao = descricaoItemEditText2.text.toString().trim()
 
         if (endereco.isEmpty() || imageUri == null) {
             Toast.makeText(context, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT)
@@ -117,9 +120,11 @@ class DashboardFragment : Fragment() {
             if (bytes != null) {
                 val base64Image = Base64.encodeToString(bytes, Base64.DEFAULT)
                 val endereco = enderecoEditText.text.toString().trim()
+                val descricao = descricaoItemEditText2.text.toString().trim()
                 //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
 
-                val item = Item(endereco, base64Image)
+                val item = Item(endereco, descricao, base64Image)
+                val item2 = Item(endereco, descricao, base64Image)
 
                 saveItemIntoDatabase(item)
             }
