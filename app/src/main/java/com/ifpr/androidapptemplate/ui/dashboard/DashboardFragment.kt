@@ -102,7 +102,7 @@ class DashboardFragment : Fragment() {
         val endereco = enderecoEditText.text.toString().trim()
         val descricao = descricaoItemEditText2.text.toString().trim()
 
-        if (endereco.isEmpty() || imageUri == null) {
+        if (endereco.isEmpty()) {
             Toast.makeText(context, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT)
                 .show()
             return
@@ -128,6 +128,15 @@ class DashboardFragment : Fragment() {
 
                 saveItemIntoDatabase(item)
             }
+        } else {
+            val endereco = enderecoEditText.text.toString().trim()
+            val descricao = descricaoItemEditText2.text.toString().trim()
+            //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
+
+            val item = Item(endereco, descricao)
+            val item2 = Item(endereco, descricao)
+
+            saveItemIntoDatabase(item)
         }
     }
 

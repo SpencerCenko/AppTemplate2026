@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">VocaLearn</string>
     <string name="title_home">Lições</string>
-    <string name="title_dashboard">Palavras</string>
+    <string name="title_dashboard">Criar</string>
     <string name="title_notifications">Notificações</string>
     <string name="title_profile">Perfil</string>
     <string name="title_itens">Itens</string>
