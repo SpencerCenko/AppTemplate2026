@@ -191,13 +191,40 @@ class HomeFragment : Fragment() {
                         val itemView = LayoutInflater.from(container.context)
                             .inflate(R.layout.item_template, container, false)
 
+
                         val imageView = itemView.findViewById<ImageView>(R.id.item_image)
                         val nomeView = itemView.findViewById<TextView>(R.id.item_nome)
                         val descricaoView = itemView.findViewById<TextView>(R.id.item_descricao)
+                        val enderecoView = itemView.findViewById<TextView>(R.id.item_endereco)
+
+                        val btnRota = itemView.findViewById<Button>(R.id.btn_rota)
 
                         nomeView.text = "Nome: ${item.nome ?: "Não informado"}"
                         descricaoView.text = "Descrição: ${item.descricao ?: "Não informado"}"
+                        enderecoView.text = "Endereço: ${item.endereco ?: "Não informado"}"
 
+                        btnRota.setOnClickListener {
+
+                            val endereco = item.endereco
+
+                            if (!endereco.isNullOrEmpty()) {
+
+                                val uri = "google.navigation:q=${endereco}"
+                                val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
+
+                                intent.setPackage("com.google.android.apps.maps")
+                                intent.data = android.net.Uri.parse(uri)
+
+                                try {
+                                    container.context.startActivity(intent)
+                                } catch (e: Exception) {
+                                    Toast.makeText(container.context, "App de mapas não encontrado", Toast.LENGTH_SHORT).show()
+                                }
+
+                            } else {
+                                Toast.makeText(container.context, "Endereço inválido", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                         if (!item.imageUrl.isNullOrEmpty()) {
                             Glide.with(container.context).load(item.imageUrl).into(imageView)
                         } else if (!item.base64Image.isNullOrEmpty()) {
